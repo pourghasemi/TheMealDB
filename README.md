@@ -10,6 +10,9 @@ The Meal DB is a **Responsive** web application for searching food recipes.
 
 It also shows the list of **categories** and **areas** in the side-bar for easy access.   
   
+## Demo
+
+https://resplendent-starship-dddcb0.netlify.app
 
 ##  Install the application
 

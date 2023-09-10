@@ -50,7 +50,7 @@ const updateSelectedCategory = (type: string) => {
   if (searchQuery.value)
     router.push({
       name: selectedCategory.value.toString(),
-      params: { searchItem: searchQuery.value }
+      params: { dynamicSegment: searchQuery.value }
     })
 }
 
