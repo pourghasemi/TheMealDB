@@ -27,6 +27,11 @@ export interface MealArea {
   strArea: string
 }
 
+export interface MealSearchItem {
+  name: string,
+  link: string
+}
+
 interface ApiLoaderResult {
   isLoading: Ref<boolean>
   error: Ref<any | null>

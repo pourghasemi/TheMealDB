@@ -25,6 +25,7 @@ import Dropdown from '@/components/widgets/Dropdown.vue'
 import MealService from '@/services/MealService'
 import SearchIcon from '@/components/icons/SearchIcon.vue'
 import { useRouter } from 'vue-router'
+import type { MealSearchItem } from '@/types/types'
 import { SearchType } from '@/types/types'
 
 const searchTypeList = Object.entries(SearchType)
@@ -35,7 +36,7 @@ const searchQuery = ref<string>('')
 const selectedCategory = ref<string>('Meal')
 type SearchType = keyof typeof SearchType
 
-const searchResults = ref<{ name: any; link: string }[] | null>([])
+const searchResults = ref<MealSearchItem[]>([])
 let selectedType = ref(SearchType)
 
 const router = useRouter()

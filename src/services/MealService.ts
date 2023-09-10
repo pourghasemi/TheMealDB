@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { API_URL, IMAGE_URL } from './config'
-import type { Meal, MealCategory, MealArea, Ingredient } from '../types/types'
+import type { Meal, MealCategory, MealArea, Ingredient, MealSearchItem } from '../types/types'
 import { SearchType } from '../types/types'
 
 export default {
@@ -157,14 +157,18 @@ export default {
     }
   },
 
-  async loadMeals(searchQuery: string, searchType: number) {
-    const results = await this.searchMeals(searchType, searchQuery)
-    if (results) {
-      return results.map((result: any) => {
-        return { name: result.strMeal, link: `/recipe/${result.idMeal}` }
-      })
+  async loadMeals(searchQuery: string, searchType: number): Promise<MealSearchItem[]> {
+    try {
+      const results = await this.searchMeals(searchType, searchQuery)
+      if (results?.length) {
+        return results.map((result) => {
+          return { name: result.strMeal, link: `/recipe/${result.idMeal}` }
+        })
+      }
+      return []
+    } catch {
+      return []
     }
-    return null
   },
 
   // Search for meals based on the specified search type and query

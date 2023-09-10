@@ -17,7 +17,6 @@
 </template>
 
 <script setup lang="ts">
-import { IMAGE_URL } from '@/services/config.ts'
 import MealService from '@/services/MealService.ts'
 import Spinner from '@/components/widgets/Spinner.vue'
 import { useRoute } from 'vue-router'
