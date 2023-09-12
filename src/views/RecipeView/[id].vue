@@ -22,11 +22,15 @@ import Spinner from '@/components/widgets/Spinner.vue'
 import { useRoute } from 'vue-router'
 import { ref, onMounted, watch } from 'vue'
 import useApiLoader from '@/composables/useApiLoader'
+import useRouteHead from '@/composables/useRouteHead'
+
 import Recipe from '@/components/widgets/Recipe.vue'
 import type { ApiLoaderResultMealType } from '@/types/types.ts'
 
 const route = useRoute()
-const { isLoading, data, error, fetchData }: ApiLoaderResultMealType = useApiLoader()
+const { isLoading, data, fetchData }: ApiLoaderResultMealType = useApiLoader()
+const props = defineProps(['dynamicSegment', 'mealName'])
+useRouteHead(props);
 
 onMounted(async () => {
   await fetchRecipe(route.params.dynamicSegment)

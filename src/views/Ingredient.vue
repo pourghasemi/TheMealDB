@@ -21,13 +21,16 @@ import Spinner from '@/components/widgets/Spinner.vue'
 import { useRoute } from 'vue-router'
 import { ref, onMounted, watch } from 'vue'
 import useApiLoader from '@/composables/useApiLoader'
+import useRouteHead from '@/composables/useRouteHead'
 import Recipe from '@/components/widgets/Recipe.vue'
 import NoResult from '@/components/widgets/NoResult.vue'
 import type { Ingredient, Meal, ApiLoaderResultMealsType } from '@/types/types.ts'
 
 const route = useRoute()
+const props = defineProps(['dynamicSegment'])
 
 const { isLoading, data, error, fetchData }: ApiLoaderResultMealsType = useApiLoader()
+useRouteHead(props);
 
 const meals = ref<Ingredient[] | null>(null)
 
@@ -55,7 +58,7 @@ function ProductModel() {
       MealService.mapIngredientResponseToIngredientModel(
         meal.strMeal,
         meal.strMealThumb,
-        `/recipe/${meal.idMeal}`
+        `/recipe/${meal.idMeal}/${meal.strMeal}`
       )
     )
 }

@@ -9,7 +9,7 @@
         v-for="meal in data"
         :key="meal.idMeal"
         :title="meal.strMeal"
-        :link="`${recipeLink}/${meal.idMeal}`"
+        :link="`${recipeLink}/${meal.idMeal}/${meal.strMeal}`"
         :image="`${meal.strMealThumb}/preview`"
       />
     </ul>
@@ -19,13 +19,14 @@
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { ref, onMounted, watch } from 'vue'
-import { useHead } from '@vueuse/head'
+import { onMounted, watch } from 'vue'
 import { SearchType } from '@/types/types'
 import MealService from '@/services/MealService.ts'
 import Card from '@/components/widgets/Card.vue'
 import Spinner from '@/components/widgets/Spinner.vue'
 import useApiLoader from '@/composables/useApiLoader'
+import useRouteHead from '@/composables/useRouteHead'
+
 import NoResult from '@/components/widgets/NoResult.vue'
 
 const route = useRoute()
@@ -33,13 +34,11 @@ const { isLoading, data, fetchData } = useApiLoader()
 const props = defineProps(['dynamicSegment'])
 const recipeLink = '/recipe'
 type SearchType = keyof typeof SearchType
+useRouteHead(props)
 
-useHead({
-  title: `${props.dynamicSegment || route.name}`,
-  meta: [{ name: 'description', content: `About ${props.dynamicSegment || route.name}` }]
-})
 
-onMounted(async () => {
+
+onMounted(() => {
   fetchMeals()
 })
 

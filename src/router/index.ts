@@ -5,7 +5,8 @@ import NotFound from '@/views/NotFound.vue'
 import { SearchType } from '@/types/types'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory('/'),
+ 
   linkActiveClass: 'active',
   routes: [
     {
@@ -53,7 +54,7 @@ const router = createRouter({
       }
     },
     {
-      path: '/recipe/:dynamicSegment',
+      path: '/recipe/:dynamicSegment/:mealName',
       name: 'recipe',
       component: () => import('@/views/RecipeView/[id].vue'),
       props: true,
@@ -66,7 +67,7 @@ const router = createRouter({
       name: 'not-found',
       component: NotFound
     }
-  ]
+  ],
 })
 
 export default router

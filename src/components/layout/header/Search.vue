@@ -55,6 +55,7 @@ const updateSelectedCategory = (type: string) => {
 }
 
 watch([searchQuery, selectedType], async () => {
+  searchResults.value=[]
   searchResults.value = await MealService.loadMeals(
     searchQuery.value,
     SearchType[selectedCategory.value as SearchType]

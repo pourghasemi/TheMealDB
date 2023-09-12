@@ -162,7 +162,7 @@ export default {
       const results = await this.searchMeals(searchType, searchQuery)
       if (results?.length) {
         return results.map((result) => {
-          return { name: result.strMeal, link: `/recipe/${result.idMeal}` }
+          return { name: result.strMeal, link: `/recipe/${result.idMeal}/${result.strMeal}` }
         })
       }
       return []
