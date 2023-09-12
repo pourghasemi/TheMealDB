@@ -1,29 +1,22 @@
 import { useHead } from '@vueuse/head'
-import { ref, onBeforeUnmount, watchEffect } from 'vue'
+import {  watchEffect } from 'vue'
 
-export default function useRouteHead(props: any) {
-  const pageTitle = ref('');
-  // const props = defineProps(['dynamicSegment', 'mealName'])
+interface Props{
+  mealName?:string,
+  dynamicSegment?:string
+}
+export default function useRouteHead(props: Props) {
 
   const updatePageTitle = () => {
-    pageTitle.value = ` ${props.mealName || props.dynamicSegment}`;
+    const pageTitle = ` ${props?.mealName || props?.dynamicSegment || 'The Meal DB'}`;
     useHead({
-      title: `${props.mealName || props.dynamicSegment}`,
-      meta: [{ name: 'description', content: `About ${props.mealName || props.dynamicSegment}` }]
+      title: `${pageTitle}`,
+      meta: [{ name: 'description', content: `About ${pageTitle}` }]
     })
   };
 
-  // Watch for route changes and update page title
   watchEffect(() => {
     updatePageTitle();
   });
 
-  // Cleanup the watch when the component is unmounted
-  onBeforeUnmount(() => {
-    pageTitle.value = '';
-  });
-
-  // return {
-  //   pageTitle,
-  // };
 }
